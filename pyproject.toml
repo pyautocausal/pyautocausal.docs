@@ -56,6 +56,17 @@ jupyter = "^1.1.1"
 nbconvert = "^7.16.6"
 nbclient = "^0.10.2"
 
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.2.6"
+sphinx-rtd-theme = "^2.0.0"
+myst-parser = "^2.0.0"
+sphinx-autodoc-typehints = "^1.25.0"
+linkify-it-py = "^2.0.0"
+sphinxcontrib-mermaid = "^0.9.2"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

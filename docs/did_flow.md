@@ -1,6 +1,12 @@
+# Difference-in-Differences Decision Flow
+
+This guide provides a step-by-step decision flow for implementing Difference-in-Differences (DiD) analyses.
+
+## Decision Tree
+
 START
 │
-├─► 1. Nail down the causal target (ATT of what population? when?)            ──[Guide Step 1]:contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
+├─► 1. Nail down the causal target (ATT of what population? when?)
 │
 ├─► 2. What does your panel look like?
 │       │
@@ -13,16 +19,16 @@ START
 │       │
 │       ├─ **Never-treated units available & credible?**  
 │       │        Yes → Assumption PT-GT-Nev → Estimator:  
-│       │              Callaway-Sant’Anna “never” or Sun-Abraham cohort-time averages:contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
+│       │              Callaway-Sant'Anna "never" or Sun-Abraham cohort-time averages
 │       │
 │       └─ No → Use not-yet-treated units  
 │                Assumption PT-GT-NYT → Estimator:  
-│                Callaway-Sant’Anna “nyt”, stacked DiD, local projections:contentReference[oaicite:4]{index=4}:contentReference[oaicite:5]{index=5}
+│                Callaway-Sant'Anna "nyt", stacked DiD, local projections
 │
 ├─► 4. Will you impose *full* parallel trends across **all** groups & times?  
 │       │           (PT-GT-all — strong and risky)  
 │       ├─ Yes → Estimator options: Extended TWFE (Wooldridge 2021),  
-│       │        Borusyak-Jaravel-Spiess, de Chaisemartin-D’Haultfoeuille:contentReference[oaicite:6]{index=6}:contentReference[oaicite:7]{index=7}  
+│       │        Borusyak-Jaravel-Spiess, de Chaisemartin-D'Haultfoeuille  
 │       └─ No  → stick with comparison group choice from step 3
 │
 ├─► 5. Are treatment effects plausibly constant across cohorts/time?  
@@ -32,7 +38,7 @@ START
 │       │        to check for negative or perverse weighting.  
 │       │
 │       └─ No  → Drop TWFE; rely on block-based estimators.  
-│                 (TWFE mixes already-treated controls and can flip signs.):contentReference[oaicite:8]{index=8}
+│                 (TWFE mixes already-treated controls and can flip signs.)
 │
 ├─► 6. Covariate imbalance between treated and controls?
 │       │
@@ -42,16 +48,22 @@ START
 │                • Regression Adjustment (RA)  
 │                • Inverse Probability Weighting (IPW)  
 │                • Doubly-Robust (DR) combo  
-│                (Sant’Anna-Zhao 2020; Callaway-Sant’Anna 2021):contentReference[oaicite:9]{index=9}
+│                (Sant'Anna-Zhao 2020; Callaway-Sant'Anna 2021)
 │
 ├─► 7. Decide the weighting scheme ω up-front  
-│       (unit-level ATT vs person-level ATT; weights shape the estimand):contentReference[oaicite:10]{index=10}:contentReference[oaicite:11]{index=11}
+│       (unit-level ATT vs person-level ATT; weights shape the estimand)
 │
 ├─► 8. Inference & robustness  
-│       • Cluster appropriately; discuss what’s random (Guide Step 4):contentReference[oaicite:12]{index=12}:contentReference[oaicite:13]{index=13}  
+│       • Cluster appropriately; discuss what's random (Guide Step 4)
 │       • Plot pre-trends for every comparison block.  
 │       • Run sensitivity/bounds if pre-trends look shaky (Rambachan-Roth etc.).
 │
 └─► 9. If any assumption above fails → abandon DiD or redesign.  
-        (Forward-engineer, don’t reverse-engineer.):contentReference[oaicite:14]{index=14}:contentReference[oaicite:15]{index=15}
+        (Forward-engineer, don't reverse-engineer.)
 END
+
+## Key Principles
+
+- **Forward-engineer your design**: Start with the causal target and work forward through assumptions.
+- **Check assumptions rigorously**: Use diagnostic plots and tests to validate your approach.
+- **Be transparent about limitations**: Document assumptions and potential violations.
